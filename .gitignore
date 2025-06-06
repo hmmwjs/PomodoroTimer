@@ -1,0 +1,12 @@
+__pycache__/*
+build/*
+dist/*
+*.db-shm
+*.db-wal
+*.db-journal
+*.db-trace
+*.db-lock
+*.db-trace
+*.spec
+*.db
+logs/*

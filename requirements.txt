@@ -1,0 +1,27 @@
+# 高级番茄钟应用依赖包
+
+# 核心依赖
+PyQt5>=5.15.0
+PyQt5-Qt5>=5.15.0
+PyQt5-sip>=12.8.0
+PyQtChart>=5.15.0
+
+# 多屏幕支持
+screeninfo>=0.8.1
+
+# 系统通知（可选，作为后备方案）
+plyer>=2.1
+
+# 开发和打包工具（可选）
+pyinstaller>=5.0  # 用于打包成可执行文件
+black>=22.0  # 代码格式化
+pylint>=2.12  # 代码检查
+
+# Windows特定依赖（可选）
+# pywin32>=300  # Windows API支持
+
+# macOS特定依赖（可选）
+# pyobjc-framework-Cocoa>=8.0  # macOS原生支持
+
+# Linux特定依赖（可选）
+# python-dbus>=1.2  # D-Bus支持
