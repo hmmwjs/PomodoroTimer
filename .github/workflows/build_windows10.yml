@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-
+permissions:
+  contents: write  # 👈 添加这个以允许创建 release
 jobs:
   build:
     if: |
