@@ -2,11 +2,13 @@ name: Build PomodoroTimer Executable on Windows
 
 on:
   push:
-    branches: [main]  # 修改为你自己的分支
-  workflow_dispatch:  # 支持手动触发
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
   build:
+    if: |
+      github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, 'version')
     runs-on: windows-latest
 
     steps:
