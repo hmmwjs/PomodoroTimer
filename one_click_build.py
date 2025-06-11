@@ -12,6 +12,9 @@ import subprocess
 import time
 from pathlib import Path
 
+# 修复 Windows 控制台编码问题
+if sys.stdout.encoding.lower() != 'utf-8':
+    sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf-8', buffering=1)
 class OneClickBuilder:
     def __init__(self):
         self.system = platform.system()
