@@ -9,9 +9,9 @@ jobs:
   build:
     if: |
       github.event_name == 'workflow_dispatch' ||
-      contains(github.event.head_commit.message, 'version') ||
-      contains(github.event.head_commit.message, 'Version')
+      contains(toLower(github.event.head_commit.message), 'version')
     runs-on: windows-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,3 +38,22 @@ jobs:
         with:
           name: PomodoroTimer
           path: PomodoroTimer.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/heads/main')
+        with:
+          tag_name: v${{ github.run_number }}
+          name: "Auto Release v${{ github.run_number }}"
+          body: "自动构建版本"
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v1
+        with:
+          files: PomodoroTimer.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
