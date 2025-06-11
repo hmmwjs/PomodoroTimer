@@ -8,8 +8,9 @@ on:
 jobs:
   build:
     if: |
-      github.event_name == 'workflow_dispatch' ||
-      contains(toLower(github.event.head_commit.message), 'version')
+      github.event_name == 'workflow_dispatch' ||Add commentMore actions
+      contains(github.event.head_commit.message, 'version') ||
+      contains(github.event.head_commit.message, 'Version')
     runs-on: windows-latest
 
     steps:
