@@ -4,8 +4,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+
 permissions:
-  contents: write  # 👈 添加这个以允许创建 release
+  contents: write  # 允许创建 tag 和 release
+
 jobs:
   build:
     if: |
@@ -41,21 +43,15 @@ jobs:
           name: PomodoroTimer
           path: PomodoroTimer.zip
 
+      - name: Create Git Tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag v${{ github.run_number }}
+          git push origin v${{ github.run_number }}
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/heads/main')
         with:
           tag_name: v${{ github.run_number }}
-          name: "Auto Release v${{ github.run_number }}"
-          body: "自动构建版本"
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload release asset
-        uses: softprops/action-gh-release@v1
-        with:
           files: PomodoroTimer.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
